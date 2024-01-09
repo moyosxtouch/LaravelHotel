@@ -1,3 +1,3 @@
 <footer class="page-footer">
-			<p class="mb-0">Copyright © 2022. All right reserved.</p>
+			<p class="mb-0">Moyosoft 2024 —ฅ/ᐠ. ̫ .ᐟ\ฅ — </p>
 		</footer>
