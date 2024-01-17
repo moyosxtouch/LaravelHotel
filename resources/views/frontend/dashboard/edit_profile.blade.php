@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 @extends('frontend.main_master')
 @section('main')
 
@@ -36,7 +37,8 @@
 
     <section class="checkout-area pb-70">
     <div class="container">
-        <form>
+         <form action="{{route('profile.store')}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="billing-details">
@@ -62,14 +64,14 @@
                             <div class="col-lg-6 col-md-6">
             <div class="form-group">
                 <label> Address <span class="required">*</span></label>
-                <input type="text" name="address" class="form-control" value="{{ $profileData->adress }}">
+                <input type="text" name="address" class="form-control" value="{{ $profileData->address }}">
             </div>
         </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Phone <span class="required">*</span></label>
-                                    <input type="text" name="phone" class="form-control" value="{{$profileData->phone}}">
+                                    <input type="tel" name="phone" class="form-control" value="{{$profileData->phone}}">
                                 </div>
                             </div>
 
@@ -78,14 +80,14 @@
 <div class="col-lg-12 col-md-6">
 <div class="form-group">
     <label>User Profile  <span class="required">*</span></label>
-    <input type="file" class="form-control">
+    <input type="file" id="image" name="photo"  class="form-control">
 </div>
 </div>
 
 <div class="col-lg-12 col-md-6">
 <div class="form-group">
-    <label>Town / City <span class="required">*</span></label>
-    <input type="text" class="form-control">
+    <label> <span class="required">*</span></label>
+<img  id="showImage" src="{{(!empty($profileData->photo))? url('upload/user_images/'.$profileData->photo) : url('upload/no_image.jpg')}} " alt="photo" class="rounded-circle p-1 bg-primary" width="80">
 </div>
 </div>
 
@@ -106,4 +108,15 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#image').change(function(e){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#showImage').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+        </script>
 @endsection
