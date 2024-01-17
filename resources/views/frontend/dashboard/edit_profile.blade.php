@@ -46,38 +46,30 @@
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>First Name <span class="required">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <label> Name <span class="required">*</span></label>
+                                    <input type="text" name="name"  class="form-control" value="{{$profileData->name}}">
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
-                                    <label>Last Name <span class="required">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <label>Email <span class="required">*</span></label>
+                                    <input type="email" name="email" class="form-control" value="{{$profileData->email}}">
                                 </div>
                             </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <label>Company Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-
 
 
                             <div class="col-lg-6 col-md-6">
-                                <div class="form-group">
-                                    <label>Email Address <span class="required">*</span></label>
-                                    <input type="email" class="form-control">
-                                </div>
-                            </div>
+            <div class="form-group">
+                <label> Address <span class="required">*</span></label>
+                <input type="text" name="address" class="form-control" value="{{ $profileData->adress }}">
+            </div>
+        </div>
 
                             <div class="col-lg-6 col-md-6">
                                 <div class="form-group">
                                     <label>Phone <span class="required">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="phone" class="form-control" value="{{$profileData->phone}}">
                                 </div>
                             </div>
 
