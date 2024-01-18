@@ -42,17 +42,24 @@
                                                 <input type="email" name="email" id="email" class="form-control" required data-error="Please enter email" placeholder="Email">
                                             </div>
                                         </div>
-                                             <div class="col-12">
-                                            <div class="form-group">
-                                                <input class="form-control" type="password" name="password" placeholder="Password">
-                                            </div>
-                                        </div>
-                                         <div class="col-12">
-                <div class="form-group">
-                    <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password">
-                  
-                </div>
+                                              <div class="col-lg-12 col-md-12">
+            <div class="form-group">
+
+                <input type="password" name="password" required placeholder="Password" class="form-control @error('password') is-invalid @enderror" id="password" >
+                @error('password')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
             </div>
+        </div>
+
+
+        <div class="col-lg-12 col-md-12">
+            <div class="form-group">
+
+                <input type="password" name="password_confirmation" required placeholder="Confirm Password"  class="form-control" id="password_confirmation" >
+
+            </div>
+        </div>
 
 
 
