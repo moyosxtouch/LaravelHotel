@@ -38,4 +38,46 @@ public function StoreTeam(Request $request){
         );
          return redirect()->route('all.team')->with($notification);
 }//end method
+public function EditTeam($id){
+    $team=Team::findOrFail($id);
+    return view('backend.team.edit_team', compact('team'));
+}//End Method
+public function UpdateTeam(Request $request){
+$team_id=$request->id;
+if ($request->file('image')) {
+      $image=$request->file('image');
+    $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    Image::make($image)->resize(550,670)->save('upload/team/'.$name_gen);
+    $save_url = 'upload/team/'.$name_gen;
+      Team::findOrFail($team_id)->update([
+
+            'name' => $request->name,
+            'position' => $request->position,
+            'facebook' => $request->facebook,
+            'image' => $save_url,
+            'created_at' => Carbon::now()
+        ]);
+         $notification = array(
+            'message' => 'Team Update With Image Successfully',
+            'alert-type' => 'success'
+        );
+         return redirect()->route('all.team')->with($notification);
+
+}else{
+     Team::findOrFail($team_id)->update([
+
+            'name' => $request->name,
+            'position' => $request->position,
+            'facebook' => $request->facebook,
+            'created_at' => Carbon::now()
+        ]);
+         $notification = array(
+            'message' => 'Team Update Without Image Successfully',
+            'alert-type' => 'success'
+        );
+         return redirect()->route('all.team')->with($notification);
+
+}
+
+}
 }
