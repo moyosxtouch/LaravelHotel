@@ -80,4 +80,19 @@ if ($request->file('image')) {
 }
 
 }
+public function DeleteTeam($id){
+$item=Team::findOrFail($id);
+$img=$item->image;
+unlink($img);
+Team::findOrFail($id)->delete();
+  $notification = array(
+            'message' => 'Team Image Delete Image Successfully',
+            'alert-type' => 'success'
+        );
+         return redirect()->back()->with($notification);
+}//End Method
+public function BookArea(){
+
+}//End Method
+
 }
