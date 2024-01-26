@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\RoomTypeController;
+use App\Http\Controllers\Backend\RoomController;
 use Illuminate\Support\Facades\Route;
 use App\Model\User;
 
@@ -84,6 +85,10 @@ Route::controller(TeamController::class)->group(function(){
 
 
 
+});
+///Room All Route
+Route::controller(RoomController::class)->group(function(){
+ Route::get('/edit/room/{id}', 'EditRoom')->name('edit.room');
 });
 
 }); // End Admin Group Middleware
