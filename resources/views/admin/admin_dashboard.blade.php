@@ -108,7 +108,7 @@
 		  } );
 	</script>
      <!-- DataTable -->
-     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+     <script src="https://cdn.tiny.cloud/1/8grgbd9o7qhcmodr2dancyplkx0gqdkco8g1rr37bd2riee3/tinymce/6/tinymce.min.js"referrerpolicy="origin"></script>
 <script>
    tinymce.init({
      selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE

@@ -89,6 +89,7 @@ Route::controller(TeamController::class)->group(function(){
 ///Room All Route
 Route::controller(RoomController::class)->group(function(){
  Route::get('/edit/room/{id}', 'EditRoom')->name('edit.room');
+ Route::post('/update/room/{id}', 'UpdateRoom')->name('update.room');
 });
 
 }); // End Admin Group Middleware
