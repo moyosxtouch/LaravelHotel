@@ -112,9 +112,14 @@
             <textarea class="form-control" name="short_desc" id="input11"> {{$editData->short_desc}} </textarea>
         </div>
          <div class="col-md-12">
+            <label for="input11" class="form-label">  Description </label>
+            <textarea class="form-control" name="description" id="input11" cols="5" rows="10"> {{$editData->description}} </textarea>
+        </div>
+
+         {{-- <div class="col-md-12">
             <label for="input11" class="form-label"> Description</label>
             <textarea class="form-control" name="description" id="myeditorinstance" >{!!$editData->description!!}</textarea>
-        </div>
+        </div> --}}
 
 
 
