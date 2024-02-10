@@ -20,11 +20,11 @@ class RoomController extends Controller
 $editData=Room::find($id);
 
 
-
-return view('backend.allroom.rooms.edit_rooms',compact('editData', 'basic_facility','multiimgs'));
+ $allroomNo = RoomNumber::where('rooms_id',$id)->get();
+        return view('backend.allroom.rooms.edit_rooms',compact('editData','basic_facility','multiimgs','allroomNo'));
     }
     //
-public function UpdateRoom(Request $request, $id){
+ public function UpdateRoom(Request $request, $id){
 
         $room  = Room::find($id);
         $room->roomtype_id = $room->roomtype_id;
@@ -50,7 +50,7 @@ public function UpdateRoom(Request $request, $id){
         }
 
         $room->save();
-        //// Update for Facility Table
+             //// Update for Facility Table
 
         if($request->facility_name == NULL){
 
@@ -72,7 +72,7 @@ public function UpdateRoom(Request $request, $id){
             } // end for
         } // end else
 
-    //// Update Multi Image
+   //// Update Multi Image
 
         if($room->save()){
             $files = $request->multi_img;
@@ -102,6 +102,7 @@ public function UpdateRoom(Request $request, $id){
         );
 
         return redirect()->back()->with($notification);
+
 
 
 
@@ -138,5 +139,57 @@ public function MultiImageDelete($id){
         return redirect()->back()->with($notification);
 
     }//End Method
+public function StoreRoomNumber(Request $request,$id){
 
+        $data = new RoomNumber();
+        $data->rooms_id = $id;
+        $data->rooms_type_id = $request->rooms_type_id;
+        $data->room_no = $request->room_no;
+        $data->status = $request->status;
+        $data->save();
+
+        $notification = array(
+            'message' => 'Room Number Added Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }//End Method
+     public function EditRoomNumber($id){
+
+        $editroomno = RoomNumber::find($id);
+        return view('backend.allroom.rooms.edit_room_no',compact('editroomno'));
+
+    }//End Method
+
+    public function UpdateRoomNumber(Request $request, $id){
+
+        $data = RoomNumber::find($id);
+        $data->room_no = $request->room_no;
+        $data->status = $request->status;
+        $data->save();
+
+       $notification = array(
+            'message' => 'Room Number Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('room.type.list')->with($notification);
+
+    }//End Method
+
+
+    public function DeleteRoomNumber($id){
+
+        RoomNumber::find($id)->delete();
+
+        $notification = array(
+            'message' => 'Room Number Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('room.type.list')->with($notification);
+
+    }//End Method
 }

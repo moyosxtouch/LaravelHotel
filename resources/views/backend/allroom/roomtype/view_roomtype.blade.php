@@ -39,7 +39,7 @@
 
 									<tr>
 										<td>{{$key+1}}</td>
-										<td><img src="{{ (!empty($item->room->image)) ? url('upload/roomimg/'.$item->room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 50px; height:30px;" ></td>
+										<td><img src="{{ (!empty($item->room->image)) ? url('upload/roomimg/'.$item->room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 100px; height:60px;" ></td>
 										<td>{{$item->name}}</td>
 										   <td>@foreach ($rooms as $theroom )
  <a href="{{route('edit.room', $theroom->id)}}" class="btn btn-warning px-3 radius-30"> Edit</a>

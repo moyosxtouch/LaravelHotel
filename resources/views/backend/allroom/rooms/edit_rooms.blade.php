@@ -46,9 +46,9 @@
                                 >
                                 @csrf
                                 <div class="col-md-4">
-                                    <label for="input1" class="form-label">Room Type Name</label>
-                                    <input type="text" name="roomtype_id" class="form-control" id="input1" value="{{$editData['type']['name']}}">
-                                </div>
+            <label for="input1" class="form-label">Room Type Name </label>
+            <input type="text" name="roomtype_id" class="form-control" id="input1" value="{{ $editData['type']['name'] }}" >
+        </div>
                                 <div class="col-md-4">
             <label for="input2" class="form-label">Total Adult</label>
             <input type="text" name="total_adult" class="form-control" id="input2"  value="{{ $editData->total_adult }}">
@@ -238,21 +238,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="tab-pane fade" id="primaryprofile" role="tabpanel">
        <div class="card">
         <div class="card-body">
@@ -260,7 +245,10 @@
                 <i class="lni lni-plus">Add New</i>
             </a>
             <div class="roomnoHide" id="roomnoHide">
-<form action="">
+<form action="{{ route('store.room.no',$editData->id) }}" method="post">
+                @csrf
+
+                <input type="hidden" name="rooms_type_id" value="{{ $editData->roomtype_id }}" >
 <div class="row">
       <div class="col-md-4">
             <label for="input2" class="form-label">Room No </label>
@@ -270,7 +258,7 @@
 
                                 <div class="col-md-4">
             <label for="input7" class="form-label">Status </label>
-            <select name="view" id="input7" class="form-select">
+            <select name="status" id="input7" class="form-select">
                 <option selected="">Select Status...</option>
                 <option value="Active">Active </option>
                 <option value="Inactive" >Inactive </option>
@@ -297,13 +285,22 @@
             <tbody>
                 <tr>
 
-                    <td>Mark</td>
-                    <td>Otto</td>
+
+     @foreach ($allroomNo as $item)
+
+                <tr>
+                    <td>{{ $item->room_no }}</td>
+                    <td>{{ $item->status }}</td>
                     <td>
-    <a href=" " class="btn btn-warning px-3 radius-30"> Edit</a>
-    <a href=" " class="btn btn-danger px-3 radius-30" id="delete"> Delete</a>
+    <a href="{{ route('edit.roomno',$item->id) }}" class="btn btn-warning px-3 radius-30"> Edit</a>
+    <a href="{{ route('delete.roomno',$item->id) }}" class="btn btn-danger px-3 radius-30" id="delete"> Delete</a> 
 
                     </td>
+                </tr>
+                @endforeach
+
+            </tbody>
+        </table>
                 </tr>
 
             </tbody>
