@@ -11,6 +11,7 @@ use Carbon\CarbonPeriod;
 use App\Models\Room;
 use App\Models\MultiImage;
 use App\Models\Facility;
+use App\Models\RoomBookedDate;
 
 class FrontendRoomController extends Controller
 {
@@ -32,7 +33,7 @@ class FrontendRoomController extends Controller
 public function BookingSearch(Request $request){
 
     $request->flash();
-    if ($request->check_in==$request->check_out) {
+    if ($request->check_in==$request->check_out || $request->check_in > $request->check_out) {
         $notification=array(
 
 'message'=> 'Something want to wrong',
@@ -42,10 +43,19 @@ public function BookingSearch(Request $request){
         return redirect()->back()->with($notification);
     }
      $sdate = date('Y-m-d',strtotime($request->check_in));
-        $edate = date('Y-m-d',strtotime($request->check_out));
+     $edate = date('Y-m-d',strtotime($request->check_out));
         $alldate = Carbon::create($edate)->subDay();
         $d_period = CarbonPeriod::create($sdate,$alldate);
-}//End Method
+        $dt_array = [];
+        foreach ($d_period as $period) {
+           array_push($dt_array, date('Y-m-d', strtotime($period)));
+        }
 
+        $check_date_booking_ids = RoomBookedDate::whereIn('book_date',$dt_array)->distinct()->pluck('booking_id')->toArray();
+
+        $rooms = Room::withCount('room_numbers')->where('status',1)->get();
+
+        return view('frontend.room.search_room',compact('rooms','check_date_booking_ids'));
+}//End Method
 }
 
